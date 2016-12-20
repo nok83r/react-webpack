@@ -1,9 +1,10 @@
 
-import React form 'react';
+import React from 'react';
+import Square from './Square';
 
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square />;
+    return <Square value={i} />;
   }
   render() {
     const status = 'Next player: X';
@@ -29,3 +30,5 @@ class Board extends React.Component {
     );
   }
 }
+
+export default Board;

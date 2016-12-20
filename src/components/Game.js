@@ -1,3 +1,7 @@
+
+import React from 'react';
+import Board from './Board';
+
 class Game extends React.Component {
   render() {
     return (
@@ -13,3 +17,5 @@ class Game extends React.Component {
     );
   }
 }
+
+export default Game;
