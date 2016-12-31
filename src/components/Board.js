@@ -3,11 +3,47 @@ import React from 'react';
 import Square from './Square';
 
 class Board extends React.Component {
-  renderSquare(i) {
-    return <Square value={i} />;
+
+  constructor() {
+    super();
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true
+    }
   }
+
+  renderSquare(i) {
+    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />;
+  }
+
+  handleClick(i) {
+    //shadow copy due to state immutability
+    const squares = this.state.squares.slice();
+
+    //Winner or filled
+    if(this.props.calculateWinner(squares) || squares[i]) {
+      return;
+    }
+
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext
+    });
+  }
+
   render() {
-    const status = 'Next player: X';
+
+    const winner = this.props.calculateWinner(this.state.squares);
+    let status;
+
+    if(winner) {
+      status = 'Winner ' + winner;
+    } else {
+      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    }
+
     return (
       <div>
         <div className="status">{status}</div>
