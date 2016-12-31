@@ -13,7 +13,7 @@ class Square extends React.Component {
   }
 }*/
 
-
+//Functional component when only render is used
 function Square(props) {
   return (
     <button className="square" onClick={() => props.onClick()}>
